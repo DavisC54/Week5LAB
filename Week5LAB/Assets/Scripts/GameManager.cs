@@ -1,51 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+/// <summary>
+/// Spawns the player and handles game over and restart
+/// <summary>
 
 public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab;
-    public GameObject meteorPrefab;
-    public GameObject bigMeteorPrefab;
     public bool gameOver = false;
 
-    public int meteorCount = 0;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        // doing this in awake so the ship is there before the camera looks for it
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
-        InvokeRepeating("SpawnMeteor", 1f, 2f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        if (gameOver)
-        {
-            CancelInvoke();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R) && gameOver)
-        {
-            SceneManager.LoadScene("Week5Lab");
-        }
-
-        if (meteorCount == 5)
-        {
-            BigMeteor();
-        }
+        Meteor.onPlayerHit += GameOver;
+        PlayerInputHandler.onRestart += Restart;
     }
 
-    void SpawnMeteor()
+    private void OnDisable()
     {
-        Instantiate(meteorPrefab, new Vector3(Random.Range(-8, 8), 7.5f, 0), Quaternion.identity);
+        Meteor.onPlayerHit -= GameOver;
+        PlayerInputHandler.onRestart -= Restart;
     }
 
-    void BigMeteor()
+    private void GameOver()
     {
-        meteorCount = 0;
-        Instantiate(bigMeteorPrefab, new Vector3(Random.Range(-8, 8), 7.5f, 0), Quaternion.identity);
+        gameOver = true;
+    }
+
+    private void Restart()
+    {
+        if (!gameOver)
+        {
+            return;
+        }
+
+        SceneManager.LoadScene("Week5Lab");
     }
 }

@@ -1,39 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+
+/// <summary>
+/// Meteors break at a certain amount of hits set in the inspector so big meteor can also use this script
+/// <summary>
 
 public class Meteor : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // the spawner, gamemanager, and camera all listen to these so meteor doesnt have to find them
+    public static UnityAction<Meteor> onDestroy = delegate { };
+    public static UnityAction onPlayerHit = delegate { };
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.Translate(Vector3.down * Time.deltaTime * 2f);
-
-        if (transform.position.y < -11f)
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    public int hitsToDestroy = 1;
+    public bool isBig;
+    private int hitCount;
 
     private void OnTriggerEnter2D(Collider2D whatIHit)
     {
-        if (whatIHit.tag == "Player")
+        if (whatIHit.CompareTag("Player"))
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().gameOver = true;
+            onPlayerHit();
             Destroy(whatIHit.gameObject);
-            Destroy(this.gameObject);
-        } else if (whatIHit.tag == "Laser")
+
+            // Small ones break but big one keeps going
+            if (!isBig)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        else if (whatIHit.CompareTag("Laser"))
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().meteorCount++;
             Destroy(whatIHit.gameObject);
-            Destroy(this.gameObject);
+            hitCount++;
+
+            if (hitCount == hitsToDestroy)
+            {
+                onDestroy(this);
+                Destroy(gameObject);
+            }
         }
     }
 }
