@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5092299590105952878}
   - component: {fileID: 2258278813557621840}
   - component: {fileID: 2920972557241435373}
-  - component: {fileID: 2748223895716869258}
+  - component: {fileID: 1402105935461511670}
+  - component: {fileID: 6451600009118999628}
   m_Layer: 0
   m_Name: BigMeteor
   m_TagString: Untagged
@@ -149,7 +150,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.505
---- !u!114 &2748223895716869258
+--- !u!114 &1402105935461511670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,6 +159,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5841098876348517303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 147004292113bf34cba36a179026f4ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9766ed80dded6154bab406035a716cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitsToDestroy: 5
+  isBig: 1
+--- !u!114 &6451600009118999628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841098876348517303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5069766b2b53d4da698e593edd87e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  angularSpeed: 15
+  followSpeed: 2
+  nearDistance: 4
+  farDistance: 6
+  farSpeedMultiplier: 2
+  separationRadius: 1
+  separationStrength: 0.5

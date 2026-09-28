@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7457709209502035483}
   - component: {fileID: 3424003524506236861}
   - component: {fileID: 6153133882007877009}
+  - component: {fileID: -3653307123773442728}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -172,7 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148ff4f929dbf1c47aaaff57047d3a78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserPrefab: {fileID: 5506627125660967038, guid: 1a8162fa00c811a43904a4f611676905, type: 3}
 --- !u!114 &6153133882007877009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,3 +203,16 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-3653307123773442728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158442464957206486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82fc58a77f01a543ae9a0cdebf843a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 5506627125660967038, guid: 1a8162fa00c811a43904a4f611676905, type: 3}
