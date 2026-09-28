@@ -16,6 +16,12 @@ public class CameraManager : MonoBehaviour
         Meteor.onDestroy += MeteorDestroyed;
     }
 
+    private void OnDisable()
+    {
+        MeteorSpawner.onBigMeteorSpawned -= ZoomOut;
+        Meteor.onDestroy -= MeteorDestroyed;
+    }
+
     private void Start()
     {
         Transform player = GameObject.FindWithTag("Player").transform;
